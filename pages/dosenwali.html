@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dosen Wali Dashboard</title>
+    <link href="../cssadmin/styles.css" rel="stylesheet" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      .sb-topnav.navbar {
+        background: linear-gradient(135deg, #1f1c2c, #928dab);
+      }
+      .sb-sidenav {
+        background: linear-gradient(135deg, #1f1c2c, #928dab);
+      }
+      .navbar-brand {
+        color: #ffffff; /* Adjust text color to white for better contrast */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add subtle shadow for blending */
+      }
+    </style>
+  </head>
+  <body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark ms-auto">
+      <!-- Navbar Brand-->
+      <a class="navbar-brand ps-3" href="?menu=admin">Dosen Wali Dashboard</a>
+      <!-- Sidebar Toggle-->
+      <button
+        class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+        id="sidebarToggle"
+        href="#!"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+      <!-- Navbar-->
+      <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            id="navbarDropdown"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fas fa-user fa-fw"></i>
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="navbarDropdown"
+          >
+            <li><a class="dropdown-item" href="#!">Settings</a></li>
+            <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="?menu=index">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div id="layoutSidenav" style="background-color: #f0f0f0">
+      <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <div class="sb-sidenav-menu">
+            <div class="nav">
+              <div class="sb-sidenav-menu-heading">Core</div>
+              <a class="nav-link" href="?menu=dosenwali">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-tachometer-alt"></i>
+                </div>
+                Dashboard
+              </a>
+              <div class="sb-sidenav-menu-heading">Data</div>
+              <a class="nav-link" href="?menu=dataMahasiswaDosen">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-user-graduate"></i>
+                </div>
+                Data Mahasiswa
+              </a>
+            </div>
+          </div>
+          <div class="sb-sidenav-footer">
+            <div class="small">Logged in as:</div>
+            Dosen Wali
+          </div>
+        </nav>
+      </div>
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container-fluid px-4">
+            <h1 class="mt-4">Dashboard</h1>
+            <ol class="breadcrumb mb-4">
+              <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+            <div
+              class="row"
+              style="
+                background-color: #ffffff;
+                border-radius: 10px;
+                padding: 20px;
+              "
+            >
+              <div class="col-xl-6">
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i>
+                    Banyaknya Mahasiswa
+                  </div>
+                  <div class="card-body">
+                    <canvas
+                      id="comparisonChart"
+                      width="100%"
+                      height="40"
+                    ></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <i class="fas fa-chart-area me-1"></i>
+                    Banyaknya User dari Bulan ke Bulan
+                  </div>
+                  <div class="card-body">
+                    <canvas
+                      id="userAreaChart"
+                      width="100%"
+                      height="40"
+                    ></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <footer class="py-4 bg-light mt-auto">
+          <div class="container-fluid px-4">
+            <div
+              class="d-flex align-items-center justify-content-between small"
+            >
+              <div class="text-muted">Copyright &copy; 2025</div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../jsadmin/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const ctx = document.getElementById("comparisonChart").getContext("2d");
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["Mahasiswa"],
+          datasets: [
+            {
+              label: "Jumlah",
+              data: [120],
+              backgroundColor: ["#0d6efd"],
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+          },
+          scales: {
+            y: { beginAtZero: true },
+          },
+        },
+      });
+
+      const ctxArea = document.getElementById("userAreaChart").getContext("2d");
+      new Chart(ctxArea, {
+        type: "line",
+        data: {
+          labels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ],
+          datasets: [
+            {
+              label: "Users",
+              data: [50, 70, 80, 60, 90, 100, 120, 110, 130, 140, 150, 160],
+              backgroundColor: "rgba(13, 110, 253, 0.2)",
+              borderColor: "#0d6efd",
+              fill: true,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+          },
+          scales: {
+            y: { beginAtZero: true },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
